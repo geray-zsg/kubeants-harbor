@@ -57,7 +57,7 @@ curl http://localhost:8080/api/projects/library/repositories
 # 获取制品信息
 curl http://localhost:8080/api/projects/library/repositories/nginx/artifacts
 
-# 复制镜像
+# 复制单个镜像制品tag
 curl -X POST http://localhost:8080/api/copy-image \
   -H "Content-Type: application/json" \
   -d '{
@@ -68,7 +68,17 @@ curl -X POST http://localhost:8080/api/copy-image \
     "dest_repo": "nginx-copy",
     "dest_tag": "v1.0"
   }'
-  
+
+# 复制镜像制品所有tag
+curl --location --request POST 'http://localhost:8080/api/copy-repository' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+		  "src_project": "rise-mesh",
+		  "src_repo": "apm-webserver",
+		  "dest_project": "rise-mesh",
+		  "dest_repo": "apm-webserver-copy-2"
+		}'
+
  # 注意事项：
 确保Harbor版本为v2.x
 
